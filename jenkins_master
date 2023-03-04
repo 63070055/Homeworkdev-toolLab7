@@ -11,12 +11,12 @@ pipeline {
 
         stage('Tigger the Slave Jobs') {
             steps {
-                script(
+                script{
                     def jsonString = readJSON file: 'test.json'
-                    echo "Name: $(jsonString.NAME), Age: $(jsonString.AGE)"
+                    echo "Name: ${jsonString.NAME}, Age: ${jsonString.AGE}"
                     echo 'Start Trigger to send name and age to slave'
                     build job: 'jenkins_slave', parameters: [string(name: 'NAME', value: 'jsonString.NAME'), string(name: 'Ages', value: 'jsonString.AGE')]
-                )
+                }
             }
         }
     }
